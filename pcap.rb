@@ -1,5 +1,9 @@
 require 'rubygems'
 require 'ffi/pcap'
+require "xmlrpc/client"
+require 'socket'
+
+
 
 class Mac
 	@byte = nil
@@ -128,10 +132,6 @@ end
 
 # 这个是选择网卡，在不同的设备上，需要选择不同的网卡
 # 先使用 puts FFI::PCap::dump_devices 打印出PC上所有的网卡，然后按选择需要的网卡
-begin
-rescue Exception => err
-end
-
 dev_name = FFI::PCap::dump_devices[2][0]
 
 pcap = FFI::PCap::Live.new(:dev => dev_name,
@@ -176,9 +176,17 @@ pcap.loop() do |this,pkt|
 	  puts "sgip.phone_number = #{sgip.phone_number}"
 	  # 这个是SGIP里包含的短信内容
 	  puts "sgip.msg = #{sgip.msg}"
+
+	  # 使用TCP发送信息，要配置IP和端口
+	  begin
+		  s = TCPSocket.new("200.200.136.42",6699)
+		  s.puts "#{sgip.phone_number.strip},#{sgip.msg}"
+		  s.close
+	  rescue Exception => e
+		  puts "Error:#{e}"		  
+	  end
   rescue Exception => err
   	  puts "error: #{err}"
   end
-
   puts "======================="
 end
