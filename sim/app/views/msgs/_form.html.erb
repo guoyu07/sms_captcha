@@ -1,0 +1,33 @@
+<%= form_for(@msg) do |f| %>
+  <% if @msg.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@msg.errors.count, "error") %> prohibited this msg from being saved:</h2>
+
+      <ul>
+      <% @msg.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :vpnip %><br>
+    <%= f.text_field :vpnip %>
+  </div>
+  <div class="field">
+    <%= f.label :vpnmac %><br>
+    <%= f.text_field :vpnmac %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :sms %><br>
+    <%= f.text_field :sms %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

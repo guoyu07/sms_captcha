@@ -1,0 +1,114 @@
+<p id="notice"><%= notice %></p>
+
+<h2><a href="http://200.200.136.45:88">短信验证码</a></h2>
+<p><a onclick="help_show()">[帮助?]</a></p>
+
+<div id="help">
+  <p>使用说明：</p>
+  <img src="http://200.200.136.45:88/setting.jpg" />
+</div>
+<script>document.getElementById("help").style.display="none";</script>
+<br>
+
+
+<%= form_tag("/msgs", method: "get") do %>
+  <%= label_tag(:f_vpnip, "设备地址:") %>
+  <%= text_field_tag(:f_vpnip) %>
+  <%= label_tag(:f_phone, "手机号码:") %>
+  <%= text_field_tag(:f_phone) %>
+  <%= label_tag(:f_user, "用户名称:") %>
+  <%= text_field_tag(:f_user) %>
+  
+  <%= submit_tag("过滤") %>
+
+  
+<% end %>
+<br>
+
+
+
+
+<input type="button" id="refr" value="自动刷新" onclick="autoref()">
+<input type="button" id="stop" value="停止刷新" onclick="stop_refresh()">
+
+<script>
+  function help_show(){
+    
+    if (document.getElementById("help").style.display=="none"){
+      stop_refresh();
+      document.getElementById("help").style.display="";
+    }
+    else{
+      document.getElementById("help").style.display="none";
+      autoref();
+    }
+    
+  }
+  function refresh(){
+    location.assign(location.href);
+  }
+
+  function geturl(){
+    return location.href;
+  }
+
+</script>
+
+
+<br>
+<div id="main">
+<table class="table">
+  <thead>
+    <tr>
+      <th>设备IP</th>
+      <th>手机号码</th>
+      <th>短息内容</th>
+      <th colspan="10"></th>
+    </tr>
+  </thead>
+
+  
+  <tbody>
+    <% @msgs.each do |msg| %>
+      <tr>
+        <td><%= msg.vpnip %></td>
+        <td><%= msg.phone %></td>
+        <td><%= msg.sms %></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+
+</table>
+</div>
+
+<br>
+
+<script language="JavaScript"> 
+var t;
+function start_refresh() { 
+   location.assign(location.href);
+} 
+function stop_refresh(){
+  clearTimeout(t);
+}
+
+function autoref(){
+  t=setTimeout('start_refresh()',2000); 
+}
+function foces(){
+  document.getElementById("f_vpnip").onfocus=stop_refresh;
+  document.getElementById("f_phone").onfocus=stop_refresh;
+  document.getElementById("f_user").onfocus=stop_refresh;
+}
+foces();
+</script>
+
+
+
+
+<footer class="footer">
+  <small>
+  <img src="http://200.200.136.45:88/ssl.png" onload="autoref()"/>
+  </small>
+</footer>

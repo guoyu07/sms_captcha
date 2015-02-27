@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vpnip:</strong>
+  <%= @msg.vpnip %>
+</p>
+
+<p>
+  <strong>Vpnmac:</strong>
+  <%= @msg.vpnmac %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @msg.phone %>
+</p>
+
+<p>
+  <strong>Sms:</strong>
+  <%= @msg.sms %>
+</p>
+
+<%= link_to 'Edit', edit_msg_path(@msg) %> |
+<%= link_to 'Back', msgs_path %>

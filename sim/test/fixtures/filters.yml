@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  f_vpnip: MyString
+  f_phone: MyString
+  f_user: MyString
+
+two:
+  f_vpnip: MyString
+  f_phone: MyString
+  f_user: MyString
