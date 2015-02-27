@@ -119,9 +119,6 @@ class Arr < Array
 	end
 
 	def to_char(byte)
-		puts "byte = #{byte}"
-
-		puts "end = #{byte.to_a.pack('c*').force_encoding('gbk')}"
 		str = byte.to_a.pack('c*').force_encoding('gbk')
 		return str
 	end
@@ -194,8 +191,8 @@ pcap.loop() do |this,pkt|
 	  # end
 	  total = Time.new.to_i
 	  # 将收到的信息，按照VPN.IP-VPN.MAC-Phone-Msg的格式，保存到数据库中
-	  cmd = "insert into msgs values('#{total}', '#{ip.src}', '#{mac.src}', '#{sgip.phone_number}', '#{sgip.msg}', 0, 0)"
-	  puts "cmd = #{cmd}"
+	  #cmd = "insert into msgs values('#{total}', '#{ip.src}', '#{mac.src}', '#{sgip.phone_number}', '#{sgip.msg}', 0, 0)"
+	  #puts "cmd = #{cmd}"
 	  db.execute("insert into msgs values('#{total}', '#{ip.src}', '#{mac.src}', '#{sgip.phone_number}', '#{sgip.msg}', 0, 0)")
 	  # 将数据库中的内容，显示到web页面里，实时刷新
 	  sleep(0.1)
